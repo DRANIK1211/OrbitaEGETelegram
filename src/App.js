@@ -4,19 +4,17 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState('');
 
 
   useEffect(() => {
     // Ждем, когда Telegram инициализирует WebApp
     if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.ready(); // Сообщаем Telegram, что приложение готово
-      window.Telegram.WebApp.expand(); // Раскрываем на весь экран
+      // window.Telegram.WebApp.ready(); // Сообщаем Telegram, что приложение готово
+      // window.Telegram.WebApp.expand(); // Раскрываем на весь экран
       
-      // Получаем данные пользователя (они доступны сразу)
-      const user = window.Telegram.WebApp.initDataUnsafe?.user;
-      console.log('Пользователь:', user);
-      setUser(user)
+      // // Получаем данные пользователя (они доступны сразу)
+      // const user = window.Telegram.WebApp.initDataUnsafe?.user;
+      // console.log('Пользователь:', user);
       
       setIsLoading(false);
     } else {
@@ -38,16 +36,10 @@ function App() {
     );
   }
 
-  if(user){
-    <div className="App">
-      Запущено в телеграмм
-    </div>
-  }
-
   //main screen
   return (
     <div className="App">
-      Запущено вне телеграмм
+      Запущено
     </div>
   );
 }
