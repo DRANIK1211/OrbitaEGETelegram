@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState('');
+
 
   useEffect(() => {
     // Ждем, когда Telegram инициализирует WebApp
@@ -14,13 +16,14 @@ function App() {
       // Получаем данные пользователя (они доступны сразу)
       const user = window.Telegram.WebApp.initDataUnsafe?.user;
       console.log('Пользователь:', user);
+      setUser(user)
       
       setIsLoading(false);
     } else {
       // Запасной вариант, если запускаем не в Telegram
       console.warn('Запущено вне Telegram');
       
-      //setIsLoading(false);
+      setIsLoading(false);
     }
   }, []);
 
@@ -35,10 +38,16 @@ function App() {
     );
   }
 
+  if(user){
+    <div className="App">
+      Запущено в телеграмм
+    </div>
+  }
+
   //main screen
   return (
     <div className="App">
-      
+      Запущено вне телеграмм
     </div>
   );
 }
